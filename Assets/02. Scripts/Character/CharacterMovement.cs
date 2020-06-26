@@ -1,0 +1,35 @@
+﻿using UnityEngine;
+using UnityEngine.AI;
+
+namespace Isekai.Characters
+{
+    public class CharacterMovement : MonoBehaviour
+    {
+        [SerializeField]
+        private PlayableCharacter playableCharacter = default;
+        [SerializeField]
+        private NavMeshAgent agent = default;
+        [SerializeField]
+        private Animator animator = default;
+        [SerializeField]
+        private GamedevsToolbox.ScriptableArchitecture.Sets.RuntimeSingleCamera cameraRef = default;
+        [SerializeField]
+        private GamedevsToolbox.CommandPattern.CommandProcessor processor = default;
+
+        private void Update()
+        {
+            animator.SetFloat("movementSpeed", agent.velocity.magnitude);
+        }
+
+        public void MoveToScreenPoint(Vector2 screenPoint)
+        {
+            Ray ray = cameraRef.Get().ScreenPointToRay(screenPoint);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo))
+            {
+                Interactions.InteractionCommand c = new CharacterMoveCommand(hitInfo.point);
+                c.SetInteractionCharacter(playableCharacter);
+                processor.ProcessCommand(c);
+            }
+        }
+    }
+}
