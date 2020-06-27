@@ -11,8 +11,8 @@ namespace Isekai.Buildings
         public override InteractionCommand[] DispatchCommand()
         {
             return new InteractionCommand[] {
-                new CharacterMoveCommand(enterPoint.position),
-                new TavernCommand()
+                new CharacterMoveCommand(enterPoint.position, positionMarkerPrefab),
+                new TavernCommand(enterPoint, buildingCenterPoint)
             };
         }
     }

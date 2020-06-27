@@ -19,10 +19,12 @@ namespace Isekai.Characters
                     selectedPlayableCharactersSet.ForEach((pc) =>
                     {
                         InteractionCommand[] interactionCommands = currentInteractableObjectsSet.Items[0].DispatchCommand();
+                        bool cancelAll = true;
                         foreach (InteractionCommand ic in interactionCommands)
                         {
                             ic.SetInteractionCharacter(pc);
-                            pc.commandProcessor.ProcessCommand(ic);
+                            pc.commandProcessor.ProcessCommand(ic, cancelAll);
+                            cancelAll = false;
                         }
                     });
                 } else

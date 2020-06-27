@@ -12,6 +12,10 @@ namespace Isekai.Buildings
         private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent hoverEndEvent;
         [SerializeField]
         protected Transform enterPoint = default;
+        [SerializeField]
+        protected Transform buildingCenterPoint = default;
+        [SerializeField]
+        protected GameObject positionMarkerPrefab = default;
 
         public void OnHoverStart()
         {

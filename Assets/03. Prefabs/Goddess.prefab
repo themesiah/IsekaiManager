@@ -50,12 +50,12 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 3
+  m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 500
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   animator: {fileID: 2512232471925196959}
   cameraRef: {fileID: 11400000, guid: 15e22d3e253666e4abe5b602c3cd4204, type: 2}
   processor: {fileID: 2512232470511315587}
+  positionMarkerPrefab: {fileID: 3951066675443674666, guid: e0078a55c2891424ea4c4c2533e5cb7d, type: 3}
 --- !u!114 &2512232470511315836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +155,10 @@ PrefabInstance:
     - target: {fileID: 3951066675443674666, guid: e0078a55c2891424ea4c4c2533e5cb7d, type: 3}
       propertyPath: m_Name
       value: Selection
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951066675443674666, guid: e0078a55c2891424ea4c4c2533e5cb7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6860089782078841817, guid: e0078a55c2891424ea4c4c2533e5cb7d, type: 3}
       propertyPath: m_LocalRotation.x

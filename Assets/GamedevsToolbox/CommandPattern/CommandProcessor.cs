@@ -40,12 +40,12 @@ namespace GamedevsToolbox.CommandPattern
 
         public void OnEventRaised(Command command)
         {
-            ProcessCommand(command);
+            ProcessCommand(command, true);
         }
 
-        public void ProcessCommand(Command command)
+        public void ProcessCommand(Command command, bool cancelOldCommands)
         {
-            OnProcessCommand(command);
+            OnProcessCommand(command, cancelOldCommands);
             Log(string.Format("Added command of type {0}", command.GetType()));
             commandQueue.Add(command);
             Log(string.Format("Commands in queue: {0}", commandQueue.Count));
@@ -56,9 +56,12 @@ namespace GamedevsToolbox.CommandPattern
             }
         }
 
-        public virtual void OnProcessCommand(Command command)
+        public virtual void OnProcessCommand(Command command, bool cancelOldCommands)
         {
-
+            if (cancelOldCommands)
+            {
+                CancelAll();
+            }
         }
 
         private void ProcessNextCommand()
@@ -83,7 +86,12 @@ namespace GamedevsToolbox.CommandPattern
         public void CancelAll()
         {
             if (commandQueue.Count > 0)
-                commandQueue[0].Cancel();
+            {
+                foreach(Command c in commandQueue)
+                {
+                    c.Cancel();
+                }
+            }
             commandQueue.Clear();
         }
 

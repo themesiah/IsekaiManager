@@ -5,9 +5,9 @@ namespace Isekai.Characters
 {
     public class RTSCommandProcessor : CommandProcessor
     {
-        public override void OnProcessCommand(Command command)
+        public override void OnProcessCommand(Command command, bool cancelOldCommands)
         {
-            if (!Input.GetKey(KeyCode.LeftShift))
+            if (!Input.GetKey(KeyCode.LeftShift) && cancelOldCommands)
             {
                 CancelAll();
             }
