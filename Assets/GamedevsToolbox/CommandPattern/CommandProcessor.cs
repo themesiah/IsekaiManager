@@ -8,7 +8,7 @@ namespace GamedevsToolbox.CommandPattern
      * This monobehaviour can be used as standalone using the ProcessCommand method, or can be used with a command event.
      * TODO: Undo things
      */
-    public class CommandProcessor : MonoBehaviour
+    public class CommandProcessor : MonoBehaviour, Utils.IPausable
     {
         [Tooltip("Event to register with.")]
         [SerializeField]
@@ -18,6 +18,7 @@ namespace GamedevsToolbox.CommandPattern
         public class ObjectEvent : UnityEvent<Command> { };
         
         protected List<Command> commandQueue;
+        protected bool paused = false;
 
         [SerializeField]
         private bool activateLogger = false;
@@ -46,7 +47,7 @@ namespace GamedevsToolbox.CommandPattern
 
         public void ProcessCommand(Command command, bool cancelOldCommands)
         {
-            if (IsBusy)
+            if (IsBusy || paused)
             {
                 command.Cancel();
                 return;
@@ -107,6 +108,24 @@ namespace GamedevsToolbox.CommandPattern
             if (activateLogger)
             {
                 Utils.Logger.Logger.Log(text);
+            }
+        }
+
+        public void Pause()
+        {
+            paused = true;
+            if (commandQueue.Count > 0)
+            {
+                commandQueue[0].Pause();
+            }
+        }
+
+        public void Resume()
+        {
+            paused = false;
+            if (commandQueue.Count > 0)
+            {
+                commandQueue[0].Resume();
             }
         }
     }

@@ -15,6 +15,8 @@ namespace Isekai.Buildings
         protected Coroutine coroutine;
         private BuildingProcessState processState = BuildingProcessState.None;
         private UnityAction onFinishActionCache = null;
+        protected BuildingInteractionData buildingInteractionData;
+        protected Isekai.UI.BuildingInteractionProgressUI progressUI;
 
         private enum BuildingProcessState
         {
@@ -24,15 +26,19 @@ namespace Isekai.Buildings
             Exiting
         }
 
-        public BuildingInteractionCommand(InteractableBuilding interactableBuilding, Transform enterPoint, Transform centerPoint)
+        public BuildingInteractionCommand(InteractableBuilding interactableBuilding, Transform enterPoint, Transform centerPoint, Isekai.UI.BuildingInteractionProgressUI progressUI, BuildingInteractionData buildingInteractionData)
         {
             this.enterPoint = enterPoint;
             this.centerPoint = centerPoint;
             this.interactableBuilding = interactableBuilding;
+            this.buildingInteractionData = buildingInteractionData;
+            this.progressUI = progressUI;
         }
 
         public override void Cancel()
         {
+            OnCancel();
+            FinishProgressUI();
             if (coroutine != null)
             {
                 
@@ -58,7 +64,6 @@ namespace Isekai.Buildings
                 animator?.SetFloat("movementSpeed", 0f);
                 interactionCharacter.commandProcessor.IsBusy = false;
             }
-            OnCancel();
         }
 
         protected virtual void OnCancel() { }
@@ -82,20 +87,36 @@ namespace Isekai.Buildings
         private IEnumerator DoBuildingFullProcess()
         {
             interactableBuilding.IsBusy = true;
+            StartProgressUI();
             interactionCharacter.commandProcessor.IsBusy = true;
             animator?.SetFloat("movementSpeed", 0.5f);
             Debug.Log("Entering building");
+            yield return ManagePause();
             yield return EnterBuilding();
+            yield return ManagePause();
             Debug.Log("Waiting");
             processState = BuildingProcessState.Inside;
             yield return DoBuildingProcess();
+            yield return ManagePause();
             Debug.Log("Exiting building");
             yield return ExitBuilding();
+            yield return ManagePause();
             Debug.Log("Building command done!");
             OnFinish();
             animator?.SetFloat("movementSpeed", 0f);
             interactableBuilding.IsBusy = false;
+            FinishProgressUI();
             onFinishActionCache();
+        }
+
+        private void StartProgressUI()
+        {
+            progressUI.InitInteraction(buildingInteractionData.ResourceData);
+        }
+
+        private void FinishProgressUI()
+        {
+            progressUI.Finish();
         }
 
         private IEnumerator EnterBuilding()
@@ -107,6 +128,7 @@ namespace Isekai.Buildings
             float timer = 0f;
             while (timer < 3f)
             {
+                yield return ManagePause();
                 interactionCharacter.transform.position = Vector3.SmoothDamp(interactionCharacter.transform.position, centerPoint.position, ref speed, 0.1f, 1f, Time.deltaTime);
                 timer += Time.deltaTime;
                 yield return null;
@@ -124,6 +146,7 @@ namespace Isekai.Buildings
             float timer = 0f;
             while (timer < 3f)
             {
+                yield return ManagePause();
                 interactionCharacter.transform.position = Vector3.SmoothDamp(interactionCharacter.transform.position, enterPoint.position, ref speed, 0.1f, 1f, Time.deltaTime);
                 timer += Time.deltaTime;
                 yield return null;

@@ -14,6 +14,8 @@ namespace Isekai.Characters
         private GameObject positionMarker = null;
         private Animator animator;
 
+        private Vector3 lastVelocity = Vector3.zero;
+
         public CharacterMoveCommand(Vector3 position, GameObject positionPrefab)
         {
             targetPosition = position;
@@ -59,6 +61,7 @@ namespace Isekai.Characters
             while (!AgentArrived())
             {
                 animator?.SetFloat("movementSpeed", agent.velocity.magnitude);
+                //yield return ManagePause();
                 yield return null;
             }
             agent.enabled = false;
@@ -88,6 +91,22 @@ namespace Isekai.Characters
             {
                 GameObject.Destroy(positionMarker);
             }
+        }
+
+        public override void Pause()
+        {
+            base.Pause();
+            agent.isStopped = true;
+            lastVelocity = agent.velocity;
+            agent.velocity = Vector3.zero;
+        }
+
+        public override void Resume()
+        {
+            base.Pause();
+            //agent.SetDestination(targetPosition);
+            agent.isStopped = false;
+            agent.velocity = lastVelocity;
         }
     }
 }

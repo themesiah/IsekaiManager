@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2512232470511315836}
   - component: {fileID: 2512232470511315587}
   - component: {fileID: 2512232470511315584}
+  - component: {fileID: 1497988118177623768}
+  - component: {fileID: 3313592450930772915}
   m_Layer: 0
   m_Name: Goddess
   m_TagString: Character
@@ -145,6 +147,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runtimeSet: {fileID: 11400000, guid: 296d2a8deae1b644f979966a9176d581, type: 2}
   component: {fileID: 2512232470511315837}
+--- !u!114 &1497988118177623768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512232470511315832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07d7f1715612e245aa5d84fe72e29fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2512232470511315587}
+        m_TargetAssemblyTypeName: GamedevsToolbox.CommandPattern.CommandProcessor,
+          Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2512232471925196959}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_speed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onResume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2512232470511315587}
+        m_TargetAssemblyTypeName: GamedevsToolbox.CommandPattern.CommandProcessor,
+          Assembly-CSharp
+        m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2512232471925196959}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_speed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3313592450930772915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512232470511315832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62d9822732d35f4ea4e9795e11e67ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runtimeSet: {fileID: 11400000, guid: 8321d289a5754204ca7b1b23eff217b3, type: 2}
+  component: {fileID: 1497988118177623768}
 --- !u!1001 &1556396411334680314
 PrefabInstance:
   m_ObjectHideFlags: 0

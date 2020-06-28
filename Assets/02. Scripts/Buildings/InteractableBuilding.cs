@@ -11,6 +11,10 @@ namespace Isekai.Buildings
         [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent hoverEndEvent = default;
         [SerializeField]
+        protected BuildingInteractionData[] buildingInteractionData = default;
+        [SerializeField]
+        protected Isekai.UI.BuildingInteractionProgressUI progressUI = default;
+        [SerializeField]
         protected Transform enterPoint = default;
         [SerializeField]
         protected Transform buildingCenterPoint = default;

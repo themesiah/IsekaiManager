@@ -12,7 +12,7 @@ namespace Isekai.Buildings
         {
             return new InteractionCommand[] {
                 new CharacterMoveCommand(enterPoint.position, positionMarkerPrefab),
-                new TavernCommand(this, enterPoint, buildingCenterPoint)
+                new TavernCommand(this, enterPoint, buildingCenterPoint, progressUI, buildingInteractionData[0])
             };
         }
     }
