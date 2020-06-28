@@ -16,12 +16,13 @@ namespace GamedevsToolbox.CommandPattern
 
         [System.Serializable]
         public class ObjectEvent : UnityEvent<Command> { };
-
-        [SerializeField]
-        private List<Command> commandQueue;
+        
+        protected List<Command> commandQueue;
 
         [SerializeField]
         private bool activateLogger = false;
+
+        public bool IsBusy { get; set; }
 
         private void OnEnable()
         {
@@ -45,6 +46,11 @@ namespace GamedevsToolbox.CommandPattern
 
         public void ProcessCommand(Command command, bool cancelOldCommands)
         {
+            if (IsBusy)
+            {
+                command.Cancel();
+                return;
+            }
             OnProcessCommand(command, cancelOldCommands);
             Log(string.Format("Added command of type {0}", command.GetType()));
             commandQueue.Add(command);
@@ -92,10 +98,11 @@ namespace GamedevsToolbox.CommandPattern
                     c.Cancel();
                 }
             }
-            commandQueue.Clear();
+            if (!IsBusy)
+                commandQueue.Clear();
         }
 
-        private void Log(string text)
+        protected void Log(string text)
         {
             if (activateLogger)
             {

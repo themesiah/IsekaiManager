@@ -8,11 +8,11 @@ namespace Isekai.Buildings
 {
     public class InteractableTavern : InteractableBuilding
     {
-        public override InteractionCommand[] DispatchCommand()
+        public override InteractionCommand[] GetUniqueCommandSet()
         {
             return new InteractionCommand[] {
                 new CharacterMoveCommand(enterPoint.position, positionMarkerPrefab),
-                new TavernCommand(enterPoint, buildingCenterPoint)
+                new TavernCommand(this, enterPoint, buildingCenterPoint)
             };
         }
     }

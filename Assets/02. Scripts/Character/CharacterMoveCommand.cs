@@ -45,6 +45,8 @@ namespace Isekai.Characters
             if (moveCoroutine != null)
             {
                 interactionCharacter.StopCoroutine(moveCoroutine);
+                agent.isStopped = true;
+                agent.enabled = false;
             }
             animator?.SetFloat("movementSpeed", 0f);
             RemovePositionMarker();

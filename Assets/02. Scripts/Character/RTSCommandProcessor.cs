@@ -12,5 +12,27 @@ namespace Isekai.Characters
                 CancelAll();
             }
         }
+
+        public override void OnProcessNextCommand()
+        {
+            IsBusy = false;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                CancelAll();
+            }
+        }
+
+        public void CancelCommand(Command command)
+        {
+            if (commandQueue.Contains(command))
+            {
+                command.Cancel();
+                commandQueue.Remove(command);
+            }
+        }
     }
 }

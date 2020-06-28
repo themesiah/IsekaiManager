@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.3188, g: 324.99292, b: 430.09552, a: 1}
+  m_IndirectSpecularColor: {r: 262.3371, g: 325.05005, b: 430.21954, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13651,6 +13651,11 @@ MonoBehaviour:
   enterPoint: {fileID: 1519350860}
   buildingCenterPoint: {fileID: 1037055295}
   positionMarkerPrefab: {fileID: 3951066675443674666, guid: e0078a55c2891424ea4c4c2533e5cb7d, type: 3}
+  globalAllowBuildingsUsage:
+    useConstant: 0
+    value: {fileID: 11400000, guid: 0e6650c959d8fb741ae58e31bb81656b, type: 2}
+    constantValue: 0
+  IsBusy: 0
 --- !u!65 &332450296
 BoxCollider:
   m_ObjectHideFlags: 0
