@@ -4,11 +4,8 @@ using UnityEngine;
 //using UnityEngine.Rendering.PostProcessing;
 public class Flythrough: MonoBehaviour
 {
-    float lookSpeed = 1.0f;
     float moveSpeed = 0.07f;
 
-    float rotationX = 0.0f;
-    float rotationY = 0.0f;
     public GameObject sun;
     public Camera mycamera;
     private Quaternion baseSunTransform;
@@ -112,24 +109,6 @@ public class Flythrough: MonoBehaviour
             apertureValue = baseAperture;
             depthFocus = baseDOFFocusDistance;
         }
-        /*if (ppVolume)
-        {
-            DepthOfField pr;
-            if (ppVolume.sharedProfile.TryGetSettings<DepthOfField>(out pr))
-            {
-                pr.focusDistance.value = depthFocus;
-                pr.aperture.value = apertureValue;
-                pr.focalLength.value = focalLength;
-            }
-        }*/
-
-
-        //rotationX += Input.GetAxis("Mouse X") * lookSpeed;
-        //rotationY += Input.GetAxis("Mouse Y") * lookSpeed;
-        // rotationY = Mathf.Clamp(rotationY, -90, 90);
-
-        //transform.localRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
-        //transform.localRotation *= Quaternion.AngleAxis(rotationY, Vector3.left);
         if (Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
         {
             transform.position += transform.forward * moveSpeed / 1.5f * Input.GetAxis("Vertical");

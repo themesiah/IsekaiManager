@@ -56,4 +56,5 @@ MonoBehaviour:
       value: {fileID: 0}
       constantValue: {x: 0, y: 0}
   selectionBoxEvent: {fileID: 11400000, guid: f9cc55b38c51135498a4c4cb19b49ea1, type: 2}
+  onCharacterUnselectedEvent: {fileID: 11400000, guid: ecffab249aeafa846ac1ebe2441284c9, type: 2}
   activateDebug: 0

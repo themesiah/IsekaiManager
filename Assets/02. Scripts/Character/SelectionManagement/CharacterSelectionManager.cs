@@ -15,6 +15,8 @@ namespace Isekai.Characters
         [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent selectionBoxEvent = default;
         [SerializeField]
+        private GamedevsToolbox.ScriptableArchitecture.Events.GameEvent onCharacterUnselectedEvent = default;
+        [SerializeField]
         private bool activateDebug = false;
 
         private Vector3 clickDownPosition = Vector3.zero;
@@ -154,12 +156,14 @@ namespace Isekai.Characters
 
         private void UnselectPlayer(PlayableCharacter pc)
         {
+            onCharacterUnselectedEvent?.Raise();
             pc.characterSelection.Unselect();
             playableCharacterSet.Remove(pc);
         }
 
         private void UnselectAllPlayers()
         {
+            onCharacterUnselectedEvent?.Raise();
             playableCharacterSet.ForEach(oldPc => oldPc.characterSelection.Unselect());
             playableCharacterSet.Clear();
         }

@@ -18,6 +18,8 @@ namespace Isekai.Buildings
         protected BuildingInteractionData buildingInteractionData;
         protected Isekai.UI.BuildingInteractionProgressUI progressUI;
 
+        private static float ENTER_EXIT_TIME = 1f;
+
         private enum BuildingProcessState
         {
             None,
@@ -126,10 +128,11 @@ namespace Isekai.Buildings
             Vector3 speed = Vector3.zero;
             interactionCharacter.transform.LookAt(centerPoint, Vector3.up);
             float timer = 0f;
-            while (timer < 3f)
+            while (timer < ENTER_EXIT_TIME)
             {
                 yield return ManagePause();
-                interactionCharacter.transform.position = Vector3.SmoothDamp(interactionCharacter.transform.position, centerPoint.position, ref speed, 0.1f, 1f, Time.deltaTime);
+                //interactionCharacter.transform.position = Vector3.SmoothDamp(interactionCharacter.transform.position, centerPoint.position, ref speed, 0.1f, 1f, Time.deltaTime);
+                interactionCharacter.transform.position = Vector3.Lerp(enterPoint.position, centerPoint.position, timer / ENTER_EXIT_TIME);
                 timer += Time.deltaTime;
                 yield return null;
             }
@@ -144,10 +147,11 @@ namespace Isekai.Buildings
             Vector3 speed = Vector3.zero;
             interactionCharacter.transform.LookAt(enterPoint, Vector3.up);
             float timer = 0f;
-            while (timer < 3f)
+            while (timer < ENTER_EXIT_TIME)
             {
                 yield return ManagePause();
-                interactionCharacter.transform.position = Vector3.SmoothDamp(interactionCharacter.transform.position, enterPoint.position, ref speed, 0.1f, 1f, Time.deltaTime);
+                //interactionCharacter.transform.position = Vector3.SmoothDamp(interactionCharacter.transform.position, enterPoint.position, ref speed, 0.1f, 1f, Time.deltaTime);
+                interactionCharacter.transform.position = Vector3.Lerp(centerPoint.position, enterPoint.position, timer / ENTER_EXIT_TIME);
                 timer += Time.deltaTime;
                 yield return null;
             }

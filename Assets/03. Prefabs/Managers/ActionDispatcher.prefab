@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedPlayableCharactersSet: {fileID: 11400000, guid: 3ec4472c4114c164785dcf222a33cd92, type: 2}
   currentInteractableObjectsSet: {fileID: 11400000, guid: 7cfd6904e0df45c478706bd8b0947a29, type: 2}
+  interactionRequestedEvent: {fileID: 11400000, guid: eb80a44d4f155be4388ff7104088082d, type: 2}

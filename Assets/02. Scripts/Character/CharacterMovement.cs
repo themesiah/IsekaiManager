@@ -8,10 +8,6 @@ namespace Isekai.Characters
         [SerializeField]
         private PlayableCharacter playableCharacter = default;
         [SerializeField]
-        private NavMeshAgent agent = default;
-        [SerializeField]
-        private Animator animator = default;
-        [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Sets.RuntimeSingleCamera cameraRef = default;
         [SerializeField]
         private GamedevsToolbox.CommandPattern.CommandProcessor processor = default;
@@ -20,7 +16,6 @@ namespace Isekai.Characters
 
         private void Update()
         {
-            //animator.SetFloat("movementSpeed", agent.velocity.magnitude);
         }
 
         public void MoveToScreenPoint(Vector2 screenPoint)

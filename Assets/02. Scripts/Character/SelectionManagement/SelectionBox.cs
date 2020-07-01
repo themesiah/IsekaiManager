@@ -6,7 +6,7 @@ namespace Isekai
     public class SelectionBox : MonoBehaviour
     {
         [SerializeField]
-        private RectTransform rectTransform;
+        private RectTransform rectTransform = default;
 
         public struct SelectionBoxData
         {

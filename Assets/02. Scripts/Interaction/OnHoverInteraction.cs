@@ -7,9 +7,9 @@ namespace Isekai.Interactions
     public class OnHoverInteraction : MonoBehaviour
     {
         [SerializeField]
-        private UnityEvent onStartHoverEvent;
+        private UnityEvent onStartHoverEvent = default;
         [SerializeField]
-        private UnityEvent onEndHoverEvent;
+        private UnityEvent onEndHoverEvent = default;
 
         private void OnMouseEnter()
         {

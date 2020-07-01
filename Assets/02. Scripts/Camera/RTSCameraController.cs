@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using GamedevsToolbox.ScriptableArchitecture.Values;
 
 namespace Isekai.Camera
 {
@@ -8,27 +7,27 @@ namespace Isekai.Camera
     {
         [Header("Movement parameters")]
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableFloatReference cameraSpeed = default;
+        private ScriptableFloatReference cameraSpeed = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableFloatReference cameraSpeedFast = default;
+        private ScriptableFloatReference cameraSpeedFast = default;
         [SerializeField] [Tooltip("From 0 to 1, using screen size as a reference")]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableVector2Reference bordersMovementLimit = default;
+        private ScriptableVector2Reference bordersMovementLimit = default;
         [Header("Zoom parameters")]
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableVector2Reference zoomLimits = default;
+        private ScriptableVector2Reference zoomLimits = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableVector2Reference cameraRotationZoomLimits = default;
+        private ScriptableVector2Reference cameraRotationZoomLimits = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableFloatReference zoomSpeed = default;
-        [SerializeField][Range(0f,1f)]
-        private float zoomAmmount = 0.5f;
+        private ScriptableFloatReference zoomSpeed = default;
+        [SerializeField]
+        private ScriptableFloatReference zoomReference = default;
         [Header("Constraints")]
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableBoolReference allowKeysMovement = default;
+        private ScriptableBoolReference allowKeysMovement = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableBoolReference allowMouseMovement = default;
+        private ScriptableBoolReference allowMouseMovement = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableBoolReference allowZoom = default;
+        private ScriptableBoolReference allowZoom = default;
 
         private void Update()
         {
@@ -99,13 +98,14 @@ namespace Isekai.Camera
             if (allowZoom.GetValue())
             {
                 float zoom = Input.GetAxis("Mouse ScrollWheel");
-                zoomAmmount = Mathf.Clamp01(zoomAmmount + zoom * Time.deltaTime * zoomSpeed.GetValue());
+
+                zoomReference.SetValue(Mathf.Clamp01(zoomReference.GetValue() + zoom * Time.deltaTime * zoomSpeed.GetValue()));
 
                 Vector3 euler = transform.eulerAngles;
-                euler.x = Mathf.Lerp(cameraRotationZoomLimits.GetValue().y, cameraRotationZoomLimits.GetValue().x, zoomAmmount);
+                euler.x = Mathf.Lerp(cameraRotationZoomLimits.GetValue().y, cameraRotationZoomLimits.GetValue().x, zoomReference.GetValue());
                 transform.eulerAngles = euler;
                 Vector3 position = transform.position;
-                position.y = Mathf.Lerp(zoomLimits.GetValue().y, zoomLimits.GetValue().x, zoomAmmount);
+                position.y = Mathf.Lerp(zoomLimits.GetValue().y, zoomLimits.GetValue().x, zoomReference.GetValue());
                 transform.position = position;
             }
         }
