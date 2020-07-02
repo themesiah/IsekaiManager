@@ -1,10 +1,10 @@
-﻿using Isekai.Interactions;
+﻿using Isekai.Buildings;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Collections;
 using Isekai.Characters;
 
-namespace Isekai.Buildings
+namespace Isekai.Interactions
 {
     public abstract class BuildingInteractionCommand : InteractionCommand
     {
@@ -15,7 +15,7 @@ namespace Isekai.Buildings
         protected Coroutine coroutine;
         private BuildingProcessState processState = BuildingProcessState.None;
         private UnityAction onFinishActionCache = null;
-        protected BuildingInteractionData buildingInteractionData;
+        protected BuildingInteractionDataTemplate buildingInteractionData;
         protected Isekai.UI.BuildingInteractionProgressUI progressUI;
 
         private static float ENTER_EXIT_TIME = 1f;
@@ -28,7 +28,7 @@ namespace Isekai.Buildings
             Exiting
         }
 
-        public BuildingInteractionCommand(InteractableBuilding interactableBuilding, Transform enterPoint, Transform centerPoint, Isekai.UI.BuildingInteractionProgressUI progressUI, BuildingInteractionData buildingInteractionData)
+        public BuildingInteractionCommand(InteractableBuilding interactableBuilding, Transform enterPoint, Transform centerPoint, Isekai.UI.BuildingInteractionProgressUI progressUI, BuildingInteractionDataTemplate buildingInteractionData)
         {
             this.enterPoint = enterPoint;
             this.centerPoint = centerPoint;
@@ -40,7 +40,6 @@ namespace Isekai.Buildings
         public override void Cancel()
         {
             OnCancel();
-            FinishProgressUI();
             if (coroutine != null)
             {
                 
@@ -89,7 +88,7 @@ namespace Isekai.Buildings
         private IEnumerator DoBuildingFullProcess()
         {
             interactableBuilding.IsBusy = true;
-            StartProgressUI();
+            OnStartBuildingProcess();
             interactionCharacter.commandProcessor.IsBusy = true;
             animator?.SetFloat("movementSpeed", 0.5f);
             Debug.Log("Entering building");
@@ -107,19 +106,21 @@ namespace Isekai.Buildings
             OnFinish();
             animator?.SetFloat("movementSpeed", 0f);
             interactableBuilding.IsBusy = false;
-            FinishProgressUI();
+            OnEndBuildingProcess();
             onFinishActionCache();
         }
 
-        private void StartProgressUI()
+        protected virtual void OnStartBuildingProcess()
         {
-            progressUI.InitInteraction(buildingInteractionData.ResourceData);
+
         }
 
-        private void FinishProgressUI()
+        protected virtual void OnEndBuildingProcess()
         {
-            progressUI.Finish();
+
         }
+
+        
 
         private IEnumerator EnterBuilding()
         {

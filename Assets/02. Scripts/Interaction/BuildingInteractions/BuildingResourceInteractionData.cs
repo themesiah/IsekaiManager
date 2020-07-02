@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using GamedevsToolbox.ScriptableArchitecture.Values;
 
-namespace Isekai.Buildings
+namespace Isekai.Interactions
 {
     [CreateAssetMenu(fileName = "New Building Interaction", menuName = "Isekai/Data/Building Interaction")]
-    public class BuildingInteractionData : ScriptableObject
+    public class BuildingResourceInteractionData : BuildingInteractionDataTemplate
     {
-        [SerializeField]
-        private string interactionName = default;
-        public string InteractionName { get { return interactionName; } }
-
         [SerializeField]
         private Resources.ResourceData resourceData = default;
         public Resources.ResourceData ResourceData { get { return resourceData; } }
@@ -21,6 +17,11 @@ namespace Isekai.Buildings
         [SerializeField]
         private int reward = default;
         public int Reward { get { return reward; } }
+
+        public override Sprite GetInteractionSprite()
+        {
+            return resourceData.ResourceIcon;
+        }
 
         // TODO: WHICH STAT USES
         //[SerializeField]

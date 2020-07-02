@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using Isekai.Interactions;
 
 namespace Isekai.UI
 {
@@ -21,7 +22,7 @@ namespace Isekai.UI
             Close();
         }
 
-        public void Init(Buildings.BuildingInteractionData[] availableInteractions, List<UnityAction> interactionActions)
+        public void Init(BuildingInteractionDataTemplate[] availableInteractions, List<UnityAction> interactionActions)
         {
             foreach (GameObject go in resourceObjects)
             {
@@ -32,7 +33,7 @@ namespace Isekai.UI
             for (int i = 0; i < availableInteractions.Length; ++i)
             {
                 resourceObjects[i].SetActive(true);
-                resourceImages[i].sprite = availableInteractions[i].ResourceData.ResourceIcon;
+                resourceImages[i].sprite = availableInteractions[i].GetInteractionSprite();
                 resourceButtons[i].onClick.RemoveAllListeners();
                 resourceButtons[i].onClick.AddListener(interactionActions[i]);
                 resourceButtons[i].onClick.AddListener(Close);

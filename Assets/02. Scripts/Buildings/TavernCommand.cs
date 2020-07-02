@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Isekai.Interactions;
-using UnityEngine.Events;
+using Isekai.Buildings;
 
 namespace Isekai.Buildings
 {
-    public class TavernCommand : BuildingInteractionCommand
+    public class TavernCommand : BuildingResourceInteractionCommand
     {
         private float timer = 0f;
 
-        public TavernCommand(InteractableTavern interactableTavern, Transform enterPoint, Transform centerPoint, Isekai.UI.BuildingInteractionProgressUI progressUI, BuildingInteractionData buildingInteractionData) : base(interactableTavern, enterPoint, centerPoint, progressUI, buildingInteractionData)
+        public TavernCommand(InteractableTavern interactableTavern, Transform enterPoint, Transform centerPoint, Isekai.UI.BuildingInteractionProgressUI progressUI, BuildingInteractionDataTemplate buildingInteractionData) : base(interactableTavern, enterPoint, centerPoint, progressUI, buildingInteractionData)
         {
 
         }
 
         protected override IEnumerator DoBuildingProcess()
         {
-            while (timer < buildingInteractionData.Duration)
+            while (timer < resourceInteractionData.Duration)
             {
                 timer += Time.deltaTime;
-                progressUI.SetProgress(timer / buildingInteractionData.Duration);
+                progressUI.SetProgress(timer / resourceInteractionData.Duration);
                 yield return ManagePause();
                 yield return null;
             }
-            buildingInteractionData.ResourceData.ResourceRef.SetValue(buildingInteractionData.ResourceData.ResourceRef.GetValue() + buildingInteractionData.Reward);
+            resourceInteractionData.ResourceData.ResourceRef.SetValue(resourceInteractionData.ResourceData.ResourceRef.GetValue() + resourceInteractionData.Reward);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Isekai.Buildings
         [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent cameraMoveToEvent = default;
         [SerializeField]
-        protected BuildingInteractionData[] buildingInteractionData = default;
+        protected BuildingInteractionDataTemplate[] buildingInteractionData = default;
         [SerializeField]
         protected Isekai.UI.BuildingInteractionProgressUI progressUI = default;
         [SerializeField]
