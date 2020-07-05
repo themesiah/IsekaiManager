@@ -9,7 +9,7 @@ namespace Isekai.Characters
     public class CharacterMoveCommand : InteractionCommand
     {
         private Vector3 targetPosition = default;
-        private NavMeshAgent agent = default;
+        private NavMeshAgentWrapper agent = default;
         private Coroutine moveCoroutine = null;
         private GameObject positionMarker = null;
         private Animator animator;
@@ -29,13 +29,14 @@ namespace Isekai.Characters
         public override void SetInteractionCharacter(PlayableCharacter pc)
         {
             base.SetInteractionCharacter(pc);
-            agent = pc.GetComponent<NavMeshAgent>();
+            agent = pc.GetComponent<NavMeshAgentWrapper>();
         }
 
         public override void Execute(UnityAction onFinishAction)
         {
             animator = interactionCharacter.GetComponentInChildren<Animator>();
-            moveCoroutine = interactionCharacter.StartCoroutine(MoveTo(onFinishAction));
+            onFinishAction += RemovePositionMarker;
+            agent.MoveTo(targetPosition, onFinishAction);
         }
 
         public override void Undo(UnityAction onFinishAction)
@@ -47,44 +48,15 @@ namespace Isekai.Characters
             if (moveCoroutine != null)
             {
                 interactionCharacter.StopCoroutine(moveCoroutine);
-                agent.isStopped = true;
-                agent.enabled = false;
+                agent.CancelMovement();
             }
-            animator?.SetFloat("movementSpeed", 0f);
+            else
+            {
+                animator?.SetFloat("movementSpeed", 0f);
+            }
             RemovePositionMarker();
         }
-
-        private IEnumerator MoveTo(UnityAction onFinishAction)
-        {
-            agent.enabled = true;
-            agent.SetDestination(targetPosition);
-            while (!AgentArrived())
-            {
-                animator?.SetFloat("movementSpeed", agent.velocity.magnitude);
-                //yield return ManagePause();
-                yield return null;
-            }
-            agent.enabled = false;
-            animator?.SetFloat("movementSpeed", 0f);
-            RemovePositionMarker();
-            onFinishAction();
-        }
-
-        private bool AgentArrived()
-        {
-            if (!agent.pathPending)
-            {
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
+        
         private void RemovePositionMarker()
         {
             if (positionMarker != null)
@@ -96,17 +68,13 @@ namespace Isekai.Characters
         public override void Pause()
         {
             base.Pause();
-            agent.isStopped = true;
-            lastVelocity = agent.velocity;
-            agent.velocity = Vector3.zero;
+            agent.Pause();
         }
 
         public override void Resume()
         {
             base.Pause();
-            //agent.SetDestination(targetPosition);
-            agent.isStopped = false;
-            agent.velocity = lastVelocity;
+            agent.Resume();
         }
     }
 }
