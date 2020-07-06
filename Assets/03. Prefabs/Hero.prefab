@@ -14,7 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onAttackDoneReceiver:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6239632024536640108}
+        m_TargetAssemblyTypeName: Isekai.Characters.AttackCalculationBehaviour, Assembly-CSharp
+        m_MethodName: OnAttackPerformed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &576281293263135882
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +47,7 @@ GameObject:
   - component: {fileID: 576281293263136114}
   - component: {fileID: 3597125505705976106}
   - component: {fileID: 639049422424278081}
+  - component: {fileID: 6239632024536640108}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Character
@@ -284,6 +297,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runtimeSet: {fileID: 11400000, guid: 8321d289a5754204ca7b1b23eff217b3, type: 2}
   component: {fileID: 3597125505705976106}
+--- !u!114 &6239632024536640108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576281293263135882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44a3dca92d25114e8fa2d61cf2cd035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatDataRef:
+    damage: 20
 --- !u!1001 &69161947853825582
 PrefabInstance:
   m_ObjectHideFlags: 0

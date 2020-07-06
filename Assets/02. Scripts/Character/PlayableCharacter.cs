@@ -9,6 +9,7 @@ namespace Isekai.Characters
         public CharacterMovement characterMovement { get; private set; }
         public NavMeshAgentWrapper agentWrapper { get; private set; }
         public Animator animator { get; private set; }
+        public AttackCalculationBehaviour attackCalculation { get; private set; }
 
         private void Awake()
         {
@@ -17,6 +18,7 @@ namespace Isekai.Characters
             characterMovement = GetComponent<CharacterMovement>();
             agentWrapper = GetComponent<NavMeshAgentWrapper>();
             animator = GetComponentInChildren<Animator>();
+            attackCalculation = GetComponent<AttackCalculationBehaviour>();
         }
     }
 }

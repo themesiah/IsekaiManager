@@ -13,25 +13,29 @@ namespace Isekai.Battle
         private Transform attackerTransform;
         private IDamageable attackReceiver;
         private UnityAction onFinish;
+        private AttackCalculationBehaviour attackCalculation;
 
-        public AutoAttackAttackingState(Animator anim, Transform defending, IDamageable receiver, Transform attacker, UnityAction action)
+        public AutoAttackAttackingState(Animator anim, Transform defending, IDamageable receiver, Transform attacker, AttackCalculationBehaviour attackCalc, UnityAction action)
         {
             animator = anim;
             defendingTransform = defending;
             attackerTransform = attacker;
             attackReceiver = receiver;
             onFinish = action;
+            attackCalculation = attackCalc;
         }
 
         public IEnumerator EnterState()
         {
             animator.SetBool("attacking", true);
+            attackCalculation.RegisterOnAttackTarget(attackReceiver.Damage);
             return null;
         }
 
         public IEnumerator ExitState()
         {
             animator.SetBool("attacking", false);
+            attackCalculation.UnregisterOnAttackTarget();
             return null;
         }
 

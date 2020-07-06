@@ -19,9 +19,9 @@ namespace Isekai.Characters
             currentHealth = maxHealthReference.GetValue();
         }
 
-        public void Damage(int damage)
+        public void Damage(AttackData damage)
         {
-            currentHealth -= damage;
+            currentHealth -= damage.physicalDamage;
             if (currentHealth < 0)
             {
                 OnDestroyed();

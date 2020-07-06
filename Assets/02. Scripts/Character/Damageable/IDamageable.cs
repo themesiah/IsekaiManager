@@ -2,7 +2,7 @@
 {
     public interface IDamageable
     {
-        void Damage(int damage);
+        void Damage(AttackData damage);
         void OnDestroyed();
         bool IsAlive();
     }

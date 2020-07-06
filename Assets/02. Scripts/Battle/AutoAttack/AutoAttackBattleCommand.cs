@@ -15,11 +15,11 @@ namespace Isekai.Battle
 
         public override void Cancel()
         {
-            attackerAgentWrapper.StartCoroutine(stateMachine.StopAutoAttack());
+            interactionCharacter.StartCoroutine(stateMachine.StopAutoAttack());
             //stateMachine.StopAutoAttack();
             if (coroutine != null)
             {
-                attackerAgentWrapper.StopCoroutine(coroutine);
+                interactionCharacter.StopCoroutine(coroutine);
             }
         }
 
@@ -31,8 +31,8 @@ namespace Isekai.Battle
         public override void Execute(UnityAction onFinishAction)
         {
             onFinishAction += Cancel;
-            stateMachine = new AutoAttackStateMachine(attackerAgentWrapper, attackerAnimator, enemyTransform, damageReceiver, onFinishAction);
-            coroutine = attackerAgentWrapper.StartCoroutine(StateMachineUpdate());
+            stateMachine = new AutoAttackStateMachine(interactionCharacter.agentWrapper, interactionCharacter.animator, enemyTransform, damageReceiver, interactionCharacter.attackCalculation, onFinishAction);
+            coroutine = interactionCharacter.StartCoroutine(StateMachineUpdate());
         }
 
         private IEnumerator StateMachineUpdate()

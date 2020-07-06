@@ -43,7 +43,6 @@ namespace Isekai.Characters
                                     {
                                         AttackBattleCommand attackCommand = (AttackBattleCommand)ic;
                                         ic.SetInteractionCharacter(pc);
-                                        attackCommand.SetAttackerData(pc.agentWrapper, pc.animator, null);
                                         pc.commandProcessor.ProcessCommand(ic, cancelAll);
                                         cancelAll = false;
                                     }
