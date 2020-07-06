@@ -23,10 +23,18 @@ namespace Isekai.Characters
         private Vector3 lastFollowPosition = Vector3.zero;
         private Transform followTransform = null;
 
+        private void Awake()
+        {
+            agent.enabled = false;
+            obstacle.enabled = true;
+            animator.enabled = true;
+        }
+
         public void MoveTo(Vector3 position, UnityAction arriveAction)
         {
             onArrived = arriveAction;
             agent.stoppingDistance = defaultStoppingDistance.GetValue();
+            following = false;
             MoveToInternal(position);
         }
 
@@ -38,13 +46,18 @@ namespace Isekai.Characters
             agent.SetDestination(position);
         }
 
-        public void Follow(Transform transform, UnityAction arriveAction)
+        public void Follow(Transform t)
         {
-            followTransform = transform;
+            Follow(t, null);
+        }
+
+        public void Follow(Transform t, UnityAction arriveAction)
+        {
+            followTransform = t;
             following = true;
-            lastFollowPosition = transform.position;
+            lastFollowPosition = followTransform.position;
             onArrived = arriveAction;
-            NavMeshAgent followAgent = transform.GetComponent<NavMeshAgent>();
+            NavMeshAgent followAgent = followTransform.GetComponent<NavMeshAgent>();
             if (followAgent != null)
             {
                 agent.stoppingDistance = followAgent.radius + defaultStoppingDistance.GetValue();
@@ -63,8 +76,11 @@ namespace Isekai.Characters
 
         public void StopFollow()
         {
-            CancelMovement();
-            following = false;
+            if (moving == true)
+            {
+                CancelMovement();
+                following = false;
+            }
         }
 
         private void Update()
@@ -75,9 +91,9 @@ namespace Isekai.Characters
 
                 if (following)
                 {
-                    if (transform.position != lastFollowPosition)
+                    if (followTransform.position != lastFollowPosition)
                     {
-                        lastFollowPosition = transform.position;
+                        lastFollowPosition = followTransform.position;
                         MoveTo(lastFollowPosition, onArrived);
                     }
                 }

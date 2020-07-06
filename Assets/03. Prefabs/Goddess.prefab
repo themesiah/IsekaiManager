@@ -59,8 +59,8 @@ MonoBehaviour:
   obstacle: {fileID: 3131173201304238226}
   animator: {fileID: 2512232471925196959}
   defaultStoppingDistance:
-    useConstant: 1
-    value: {fileID: 0}
+    useConstant: 0
+    value: {fileID: 11400000, guid: bab76df34fdfbcd418699073c49a1442, type: 2}
     constantValue: 0
     useRandom: 0
     minMax:

@@ -12,7 +12,6 @@ namespace Isekai.Characters
         {
             base.OnStateMachineEnter(animator, stateMachinePathHash);
             animator.SetInteger("attackAnimation", Random.Range(0, animationCount));
-            Debug.Log(stateMachinePathHash);
         }
     }
 }

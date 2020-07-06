@@ -3,6 +3,6 @@
     public enum InteractionType
     {
         Building = 0,
-        Enemy
+        Enemy = 1
     }
 }

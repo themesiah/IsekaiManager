@@ -73,6 +73,15 @@ MonoBehaviour:
   agent: {fileID: 576281293263135884}
   obstacle: {fileID: 176159866868244454}
   animator: {fileID: 69161947846625214}
+  defaultStoppingDistance:
+    useConstant: 0
+    value: {fileID: 11400000, guid: bab76df34fdfbcd418699073c49a1442, type: 2}
+    constantValue: 0
+    useRandom: 0
+    minMax:
+      useConstant: 1
+      value: {fileID: 0}
+      constantValue: {x: 0, y: 0}
 --- !u!195 &576281293263135884
 NavMeshAgent:
   m_ObjectHideFlags: 0

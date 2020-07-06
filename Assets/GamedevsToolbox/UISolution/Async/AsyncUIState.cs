@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using GamedevsToolbox.StateMachine;
+﻿using GamedevsToolbox.StateMachine;
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 
 namespace GamedevsToolbox.UISolution

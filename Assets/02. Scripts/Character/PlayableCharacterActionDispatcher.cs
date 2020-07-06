@@ -21,16 +21,36 @@ namespace Isekai.Characters
                 {
                     selectedPlayableCharactersSet.ForEach((pc) =>
                     {
-                        currentInteractableObjectsSet.Items[0].DispatchCommand((interactionCommands) =>
+                        switch (currentInteractableObjectsSet.Items[0].GetInteractionType())
                         {
-                            bool cancelAll = true;
-                            foreach (InteractionCommand ic in interactionCommands)
-                            {
-                                ic.SetInteractionCharacter(pc);
-                                pc.commandProcessor.ProcessCommand(ic, cancelAll);
-                                cancelAll = false;
-                            }
-                        });
+                            case InteractionType.Building:
+                                currentInteractableObjectsSet.Items[0].DispatchCommand((interactionCommands) =>
+                                {
+                                    bool cancelAll = true;
+                                    foreach (InteractionCommand ic in interactionCommands)
+                                    {
+                                        ic.SetInteractionCharacter(pc);
+                                        pc.commandProcessor.ProcessCommand(ic, cancelAll);
+                                        cancelAll = false;
+                                    }
+                                });
+                                break;
+                            case InteractionType.Enemy:
+                                currentInteractableObjectsSet.Items[0].DispatchCommand((interactionCommands) =>
+                                {
+                                    bool cancelAll = true;
+                                    foreach (InteractionCommand ic in interactionCommands)
+                                    {
+                                        AttackBattleCommand attackCommand = (AttackBattleCommand)ic;
+                                        ic.SetInteractionCharacter(pc);
+                                        attackCommand.SetAttackerData(pc.agentWrapper, pc.animator, null);
+                                        pc.commandProcessor.ProcessCommand(ic, cancelAll);
+                                        cancelAll = false;
+                                    }
+                                });
+                                break;
+                        }
+                        
                     });
                 } else
                 {
