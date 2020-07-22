@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
+using GamedevsToolbox.ScriptableArchitecture.Events;
 
 namespace Isekai.Characters
 {
     public class CharacterSelectionManager : MonoBehaviour
     {
         [SerializeField]
-        private RuntimePlayableCharacterSet playableCharacterSet = default;
+        private RuntimeCharacterSet playableCharacterSet = default;
         [SerializeField]
-        private RuntimePlayableCharacterSet allPlayableCharactersSet = default;
+        private RuntimeCharacterSet allPlayableCharactersSet = default;
         [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Sets.RuntimeSingleCamera cameraRef = default;
         [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableFloatReference singleSelectionDistanceThreshold = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent selectionBoxEvent = default;
+        private GenericGameEvent selectionBoxEvent = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Events.GameEvent onCharacterUnselectedEvent = default;
+        private GameEvent onCharacterUnselectedEvent = default;
+        [SerializeField]
+        private GenericGameEvent onCharacterSelectedEvent = default;
         [SerializeField]
         private bool activateDebug = false;
 
@@ -59,10 +62,10 @@ namespace Isekai.Characters
                     {
                         if (hitInfo.collider.tag == "Character")
                         {
-                            PlayableCharacter pc = hitInfo.collider.GetComponent<PlayableCharacter>();
-                            if (pc != null)
+                            Character c = hitInfo.collider.GetComponent<Character>();
+                            if (c != null)
                             {
-                                SelectPlayer(pc);
+                                SelectPlayer(c);
                             }
                         }
                     }
@@ -148,13 +151,14 @@ namespace Isekai.Characters
             });
         }
 
-        private void SelectPlayer(PlayableCharacter pc)
+        private void SelectPlayer(Character pc)
         {
+            onCharacterSelectedEvent?.Raise(pc);
             pc.characterSelection.Select();
             playableCharacterSet.Add(pc);
         }
 
-        private void UnselectPlayer(PlayableCharacter pc)
+        private void UnselectPlayer(Character pc)
         {
             onCharacterUnselectedEvent?.Raise();
             pc.characterSelection.Unselect();

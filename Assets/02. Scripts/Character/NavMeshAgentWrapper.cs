@@ -40,8 +40,8 @@ namespace Isekai.Characters
 
         private void MoveToInternal(Vector3 position)
         {
-            agent.enabled = true;
             obstacle.enabled = false;
+            agent.enabled = true;
             moving = true;
             agent.SetDestination(position);
         }

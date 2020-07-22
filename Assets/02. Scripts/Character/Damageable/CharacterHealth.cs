@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using GamedevsToolbox.ScriptableArchitecture.Values;
+using System;
 
 namespace Isekai.Characters
 {
@@ -11,8 +12,9 @@ namespace Isekai.Characters
         [SerializeField]
         private UnityEvent onDeathEvent = default;
 
-        private int currentHealth = 1;
+        private int currentHealth;
         private bool destroyed = false;
+        private UnityAction<int> onHealthChanged = delegate { };
 
         private void Awake()
         {
@@ -22,6 +24,12 @@ namespace Isekai.Characters
         public void Damage(AttackData damage)
         {
             currentHealth -= damage.physicalDamage;
+
+            if (damage.physicalDamage > 0)
+            {
+                onHealthChanged(currentHealth);
+            }
+
             if (currentHealth < 0)
             {
                 OnDestroyed();
@@ -37,6 +45,21 @@ namespace Isekai.Characters
         public bool IsAlive()
         {
             return !destroyed;
+        }
+
+        public void RegisterOnHealthChanged(UnityAction<int> action)
+        {
+            onHealthChanged += action;
+        }
+
+        public void UnregisterOnHealthChanged(UnityAction<int> action)
+        {
+            onHealthChanged -= action;
+        }
+
+        public int GetMaxHealth()
+        {
+            return maxHealthReference.GetValue();
         }
     }
 }

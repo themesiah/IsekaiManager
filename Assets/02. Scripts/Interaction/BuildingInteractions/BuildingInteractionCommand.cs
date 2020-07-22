@@ -72,9 +72,9 @@ namespace Isekai.Interactions
         protected virtual void OnExit() { }
         protected virtual void OnFinish() { }
 
-        public override void SetInteractionCharacter(PlayableCharacter pc)
+        public override void SetInteractionCharacter(Character c)
         {
-            base.SetInteractionCharacter(pc);
+            base.SetInteractionCharacter(c);
             animator = interactionCharacter.GetComponentInChildren<Animator>();
         }
 

@@ -6,12 +6,12 @@ namespace Isekai.Interactions
 {
     public abstract class InteractionCommand : Command
     {
-        protected PlayableCharacter interactionCharacter;
+        protected Character interactionCharacter;
         protected bool paused = false;
 
-        public virtual void SetInteractionCharacter(PlayableCharacter pc)
+        public virtual void SetInteractionCharacter(Character c)
         {
-            interactionCharacter = pc;
+            interactionCharacter = c;
         }
 
         protected IEnumerator ManagePause()

@@ -4,7 +4,7 @@ using Isekai.Battle;
 using UnityEngine.Events;
 using GamedevsToolbox.ScriptableArchitecture.Events;
 
-namespace Isekai.Characters.Interaction
+namespace Isekai.Characters.Interactions
 {
     public class InteractableEnemyCharacter : MonoBehaviour, IInteractable
     {

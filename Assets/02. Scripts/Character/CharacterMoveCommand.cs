@@ -26,10 +26,10 @@ namespace Isekai.Characters
             }
         }
 
-        public override void SetInteractionCharacter(PlayableCharacter pc)
+        public override void SetInteractionCharacter(Character c)
         {
-            base.SetInteractionCharacter(pc);
-            agent = pc.GetComponent<NavMeshAgentWrapper>();
+            base.SetInteractionCharacter(c);
+            agent = c.agentWrapper;
         }
 
         public override void Execute(UnityAction onFinishAction)

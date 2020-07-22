@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
+using Isekai.Interactions;
 
 namespace Isekai.Characters
 {
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField]
-        private PlayableCharacter playableCharacter = default;
+        private Character character = default;
         [SerializeField]
         private GamedevsToolbox.ScriptableArchitecture.Sets.RuntimeSingleCamera cameraRef = default;
         [SerializeField]
@@ -23,8 +23,8 @@ namespace Isekai.Characters
             Ray ray = cameraRef.Get().ScreenPointToRay(screenPoint);
             if (Physics.Raycast(ray, out RaycastHit hitInfo))
             {
-                Interactions.InteractionCommand c = new CharacterMoveCommand(hitInfo.point, positionMarkerPrefab);
-                c.SetInteractionCharacter(playableCharacter);
+                InteractionCommand c = new CharacterMoveCommand(hitInfo.point, positionMarkerPrefab);
+                c.SetInteractionCharacter(character);
                 processor.ProcessCommand(c, true);
             }
         }

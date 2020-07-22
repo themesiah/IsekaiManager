@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2512232470511315838}
   - component: {fileID: 3131173201304238226}
   - component: {fileID: 2512232470511315586}
-  - component: {fileID: 2512232470511315837}
+  - component: {fileID: 9013609127478880824}
   - component: {fileID: 2512232470511315839}
   - component: {fileID: 2512232470511315836}
   - component: {fileID: 2512232470511315587}
@@ -118,7 +118,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1.63, z: 0.7}
   m_Center: {x: 0, y: 0.77, z: 0}
---- !u!114 &2512232470511315837
+--- !u!114 &9013609127478880824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,9 +127,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2512232470511315832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49f899f0a656abc469fda448d31ebbfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c5f7da15eddd2847baed4c08d248e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterType: 1
+  portraitPivot: {fileID: 2512232471934446043}
 --- !u!114 &2512232470511315839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f4d823297f3e14db0c0bcf73b53c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableCharacter: {fileID: 2512232470511315837}
+  character: {fileID: 9013609127478880824}
   cameraRef: {fileID: 11400000, guid: 15e22d3e253666e4abe5b602c3cd4204, type: 2}
   processor: {fileID: 2512232470511315587}
   positionMarkerPrefab: {fileID: 3951066675443674666, guid: e0078a55c2891424ea4c4c2533e5cb7d, type: 3}
@@ -186,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runtimeSet: {fileID: 11400000, guid: 296d2a8deae1b644f979966a9176d581, type: 2}
-  component: {fileID: 2512232470511315837}
+  component: {fileID: 9013609127478880824}
 --- !u!114 &1497988118177623768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,5 +415,10 @@ Transform:
 --- !u!95 &2512232471925196959 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9520156, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
+  m_PrefabInstance: {fileID: 2512232471934585987}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2512232471934446043 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 419160, guid: f7e586317327fe240bef5a82944f49c2, type: 3}
   m_PrefabInstance: {fileID: 2512232471934585987}
   m_PrefabAsset: {fileID: 0}

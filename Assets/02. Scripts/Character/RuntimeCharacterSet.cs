@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Isekai.Characters
 {
     [CreateAssetMenu(menuName = "Isekai/Sets And Singles/Playable Character Set")]
-    public class RuntimePlayableCharacterSet : GamedevsToolbox.ScriptableArchitecture.Sets.RuntimeSet<PlayableCharacter>
+    public class RuntimeCharacterSet : GamedevsToolbox.ScriptableArchitecture.Sets.RuntimeSet<Character>
     {
     }
 }
