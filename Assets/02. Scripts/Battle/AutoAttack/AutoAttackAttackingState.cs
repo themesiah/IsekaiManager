@@ -63,5 +63,15 @@ namespace Isekai.Battle
             }
             yield return null;
         }
+
+        public void Pause()
+        {
+            // Only need to stop animator, already done
+        }
+
+        public void Resume()
+        {
+            // Only need to resume animator, already done
+        }
     }
 }

@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using GamedevsToolbox.ScriptableArchitecture.Events;
+using GamedevsToolbox.ScriptableArchitecture.Values;
 
 namespace Isekai.Buildings
 {
     public abstract class InteractableBuilding : MonoBehaviour, IInteractable
     {
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent hoverStartEvent = default;
+        private GenericGameEvent hoverStartEvent = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent hoverEndEvent = default;
+        private GenericGameEvent hoverEndEvent = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Events.GenericGameEvent cameraMoveToEvent = default;
+        private GenericGameEvent cameraMoveToEvent = default;
+        [SerializeField]
+        private ScriptableFloatReference zoomReference = default;
         [SerializeField]
         protected BuildingInteractionDataTemplate[] buildingInteractionData = default;
         [SerializeField]
@@ -59,6 +63,7 @@ namespace Isekai.Buildings
                         actionList.Add(() => { dispatchAction(GetUniqueCommandSet(index)); });
                     }
                     interactionSelectionUI.Init(buildingInteractionData, actionList);
+                    zoomReference?.SetValue(0f);
                     cameraMoveToEvent?.Raise(interactionSelectionUI.transform.position);
                 }
                 else

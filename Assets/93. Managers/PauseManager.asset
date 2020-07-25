@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: PauseManager
   m_EditorClassIdentifier: 
   pausableSet: {fileID: 11400000, guid: 8321d289a5754204ca7b1b23eff217b3, type: 2}
+  paused:
+    useConstant: 0
+    value: {fileID: 11400000, guid: b9bb80e01027b8140af713a52092a071, type: 2}
+    constantValue: 0

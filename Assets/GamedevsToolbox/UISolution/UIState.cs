@@ -51,5 +51,15 @@ namespace GamedevsToolbox.UISolution
             }
             yield return null;
         }
+
+        public void Resume()
+        {
+            menuData.anim.speed = 1f;
+        }
+
+        public void Pause()
+        {
+            menuData.anim.speed = 0f;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GamedevsToolbox.ScriptableArchitecture.Events;
 using UnityEngine;
 
 namespace Isekai.Characters

@@ -3,6 +3,7 @@ using Isekai.Characters;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using GamedevsToolbox.Utils;
 
 namespace Isekai.Battle
 {
@@ -51,6 +52,16 @@ namespace Isekai.Battle
                 action("attack");
             }
             yield return null;
+        }
+
+        public void Resume()
+        {
+            agentWrapper.Resume();
+        }
+
+        public void Pause()
+        {
+            agentWrapper.Pause();
         }
     }
 }

@@ -3,9 +3,10 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GamedevsToolbox.Utils;
 
 namespace GamedevsToolbox.StateMachine {
-    public class CoroutineStateMachine : ICoroutineState
+    public class CoroutineStateMachine : ICoroutineState, IPausable
     {
         protected ICoroutineState currentState = null;
         protected Dictionary<string, ICoroutineState> states;
@@ -60,6 +61,16 @@ namespace GamedevsToolbox.StateMachine {
                 resolve?.Invoke(newState);
                 yield return null;
             }
+        }
+
+        public virtual void Pause()
+        {
+            currentState.Pause();
+        }
+
+        public virtual void Resume()
+        {
+            currentState.Resume();
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Collections;
+using GamedevsToolbox.Utils;
 
 namespace Isekai.Battle
 {

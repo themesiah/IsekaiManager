@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using GamedevsToolbox.ScriptableArchitecture.Values;
+using Isekai.General;
 
 namespace Isekai.Managers
 {
@@ -8,15 +8,15 @@ namespace Isekai.Managers
     public class PauseManager : ScriptableObject
     {
         [SerializeField]
-        private Isekai.General.RuntimePausableSet pausableSet = default;
+        private RuntimePausableSet pausableSet = default;
+        [SerializeField]
+        private ScriptableBoolReference paused = default;
 
-        private bool paused = false;
-
-        public bool IsPaused => paused;
+        public bool IsPaused => paused.GetValue();
 
         public void SwitchPauseState()
         {
-            if (paused)
+            if (paused.GetValue() == true)
             {
                 Resume();
             } else
@@ -27,13 +27,13 @@ namespace Isekai.Managers
 
         public void Pause()
         {
-            paused = true;
+            paused.SetValue(true);
             pausableSet?.ForEach(p => p.Pause());
         }
 
         public void Resume()
         {
-            paused = false;
+            paused.SetValue(false);
             pausableSet?.ForEach(p => p.Resume());
         }
     }

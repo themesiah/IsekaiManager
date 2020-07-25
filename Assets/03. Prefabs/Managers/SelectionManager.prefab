@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3183699569501288868}
   - component: {fileID: 3183699569501288869}
+  - component: {fileID: 5504878955811416823}
   m_Layer: 0
   m_Name: SelectionManager
   m_TagString: Untagged
@@ -57,4 +58,33 @@ MonoBehaviour:
       constantValue: {x: 0, y: 0}
   selectionBoxEvent: {fileID: 11400000, guid: f9cc55b38c51135498a4c4cb19b49ea1, type: 2}
   onCharacterUnselectedEvent: {fileID: 11400000, guid: ecffab249aeafa846ac1ebe2441284c9, type: 2}
+  onCharacterSelectedEvent: {fileID: 0}
   activateDebug: 0
+--- !u!114 &5504878955811416823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183699569501288891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048a0c61cdd203a418508b2a2ed08c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7cdd6e38d5eba76428071128edab21e9, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3183699569501288869}
+        m_TargetAssemblyTypeName: Isekai.Characters.CharacterSelectionManager, GameScripts
+        m_MethodName: UnselectPlayer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

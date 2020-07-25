@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System;
+using GamedevsToolbox.Utils;
 
 namespace GamedevsToolbox.StateMachine
 {
-    public interface ICoroutineState
+    public interface ICoroutineState : IPausable
     {
         IEnumerator EnterState();
         IEnumerator ExitState();

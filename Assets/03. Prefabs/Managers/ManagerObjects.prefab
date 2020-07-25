@@ -276,6 +276,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6793515390214218878, guid: 3c111d95e5b57d54c9ca4abb954f5123, type: 3}
+      propertyPath: onAwakeEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 0719ee0b89d949d48a7ca91b2ac9fea1, type: 2}
+    - target: {fileID: 6793515390214218878, guid: 3c111d95e5b57d54c9ca4abb954f5123, type: 3}
+      propertyPath: onAwakeEvent.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
+      value: GamedevsToolbox.ScriptableArchitecture.Values.ScriptableValue`1[[System.Single,
+        mscorlib
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c111d95e5b57d54c9ca4abb954f5123, type: 3}
 --- !u!4 &4880102880988697437 stripped

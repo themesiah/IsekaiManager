@@ -44,5 +44,16 @@ namespace Isekai.Battle
         }
 
         public override void Undo(UnityAction onFinishAction){}
+
+
+        public override void Pause()
+        {
+            base.Pause();
+        }
+
+        public override void Resume()
+        {
+            base.Pause();
+        }
     }
 }

@@ -29,14 +29,29 @@ namespace Isekai.Camera
         [SerializeField]
         private ScriptableBoolReference allowZoom = default;
 
+        private void OnEnable()
+        {
+            zoomReference.RegisterOnChangeAction(OnZoomChanged);
+        }
+
+        private void OnDisable()
+        {
+            zoomReference.UnregisterOnChangeAction(OnZoomChanged);
+        }
+
         private void Update()
+        {
+            DoUpdate();
+        }
+
+        private void DoUpdate()
         {
             float x = 0f;
             float y = 0f;
             GetKeysMovementValue(ref x, ref y);
             GetMouseMovementValue(ref x, ref y);
             UpdateMovement(x, y);
-            UpdateZoom();            
+            UpdateZoom();
         }
 
         private void GetMouseMovementValue(ref float x, ref float y)
@@ -108,6 +123,11 @@ namespace Isekai.Camera
                 position.y = Mathf.Lerp(zoomLimits.GetValue().y, zoomLimits.GetValue().x, zoomReference.GetValue());
                 transform.position = position;
             }
+        }
+
+        private void OnZoomChanged(float current)
+        {
+            DoUpdate();
         }
     }
 }

@@ -5,21 +5,15 @@ using System;
 
 namespace Isekai.Characters
 {
-    public class CharacterHealth : MonoBehaviour, IDamageable
+    public class CharacterHealth : MonoBehaviour, IDamageable, ICharacterInitializable
     {
-        [SerializeField]
-        private ScriptableIntReference maxHealthReference = default;
         [SerializeField]
         private UnityEvent onDeathEvent = default;
 
+        private int maxHealth;
         private int currentHealth;
         private bool destroyed = false;
         private UnityAction<int> onHealthChanged = delegate { };
-
-        private void Awake()
-        {
-            currentHealth = maxHealthReference.GetValue();
-        }
 
         public void Damage(AttackData damage)
         {
@@ -30,7 +24,7 @@ namespace Isekai.Characters
                 onHealthChanged(currentHealth);
             }
 
-            if (currentHealth < 0)
+            if (currentHealth <= 0)
             {
                 OnDestroyed();
             }
@@ -59,7 +53,18 @@ namespace Isekai.Characters
 
         public int GetMaxHealth()
         {
-            return maxHealthReference.GetValue();
+            return maxHealth;
+        }
+
+        public int GetCurrentHealth()
+        {
+            return currentHealth;
+        }
+
+        public void InitializeCharacter(CharacterData cd)
+        {
+            maxHealth = cd.MaxHealth.GetValue();
+            currentHealth = maxHealth;
         }
     }
 }

@@ -4,17 +4,17 @@ namespace Isekai.Characters
 {
     public class Character : MonoBehaviour
     {
-        
-
-        public CharacterTypeEnum characterType = default;
+        [SerializeField]
+        private CharacterData characterData = default;
         public Transform portraitPivot = default;
-        [HideInInspector] public RTSCommandProcessor commandProcessor { get; private set; }
-        [HideInInspector] public CharacterMovement characterMovement { get; private set; }
-        [HideInInspector] public NavMeshAgentWrapper agentWrapper { get; private set; }
-        [HideInInspector] public Animator animator { get; private set; }
-        [HideInInspector] public IDamageable damageable { get; private set; }
-        [HideInInspector] public CharacterSelection characterSelection { get; private set; }
-        [HideInInspector] public AttackCalculationBehaviour attackCalculation { get; private set; }
+        public CharacterTypeEnum characterType { get; private set; }
+        public RTSCommandProcessor commandProcessor { get; private set; }
+        public CharacterMovement characterMovement { get; private set; }
+        public NavMeshAgentWrapper agentWrapper { get; private set; }
+        public Animator animator { get; private set; }
+        public CharacterHealth characterHealth { get; private set; }
+        public CharacterSelection characterSelection { get; private set; }
+        public AttackCalculationBehaviour attackCalculation { get; private set; }
 
         protected virtual void Awake()
         {
@@ -22,9 +22,21 @@ namespace Isekai.Characters
             characterMovement = GetComponent<CharacterMovement>();
             agentWrapper = GetComponent<NavMeshAgentWrapper>();
             animator = GetComponentInChildren<Animator>();
-            damageable = GetComponent<IDamageable>();
+            characterHealth = GetComponent<CharacterHealth>();
             characterSelection = GetComponent<CharacterSelection>();
             attackCalculation = GetComponent<AttackCalculationBehaviour>();
+            characterType = characterData.CharacterType;
+        }
+
+        protected virtual void Start()
+        {
+            attackCalculation?.InitializeCharacter(characterData);
+            characterHealth?.InitializeCharacter(characterData);
+        }
+
+        public CharacterData GetCharacterData()
+        {
+            return characterData;
         }
     }
 }

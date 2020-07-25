@@ -158,7 +158,7 @@ namespace Isekai.Characters
             playableCharacterSet.Add(pc);
         }
 
-        private void UnselectPlayer(Character pc)
+        public void UnselectPlayer(Character pc)
         {
             onCharacterUnselectedEvent?.Raise();
             pc.characterSelection.Unselect();

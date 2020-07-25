@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 5712766131420745748}
   - component: {fileID: 5712766131420745749}
   - component: {fileID: 5712766131420745752}
+  - component: {fileID: 1537879885631773880}
+  - component: {fileID: 5761253658092479366}
   m_Layer: 0
   m_Name: EnemySpider
   m_TagString: Untagged
@@ -239,15 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe1be69b4efed94b9ecd8667c88c2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthReference:
-    useConstant: 1
-    value: {fileID: 0}
-    constantValue: 50
-    useRandom: 0
-    minMax:
-      useConstant: 1
-      value: {fileID: 0}
-      constantValue: {x: 0, y: 0}
   onDeathEvent:
     m_PersistentCalls:
       m_Calls:
@@ -362,8 +355,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5f7da15eddd2847baed4c08d248e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterType: 2
-  portraitPivot: {fileID: 0}
+  characterData: {fileID: 11400000, guid: 8a2aa36b71da22d45ac0683d867423c3, type: 2}
+  portraitPivot: {fileID: 4804817380442296707}
+--- !u!114 &1537879885631773880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370243129885426017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07d7f1715612e245aa5d84fe72e29fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4895301968979197075}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_speed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onResume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4895301968979197075}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: set_speed
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5761253658092479366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370243129885426017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62d9822732d35f4ea4e9795e11e67ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runtimeSet: {fileID: 11400000, guid: 8321d289a5754204ca7b1b23eff217b3, type: 2}
+  component: {fileID: 1537879885631773880}
 --- !u!1001 &4673921721807823870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -560,5 +609,10 @@ Transform:
 --- !u!95 &4895301968979197075 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95051155700534472, guid: fc9ece646c03b5d4f8c2d3adfb6ffa0e, type: 3}
+  m_PrefabInstance: {fileID: 4809329493741351003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4804817380442296707 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4512682436846040, guid: fc9ece646c03b5d4f8c2d3adfb6ffa0e, type: 3}
   m_PrefabInstance: {fileID: 4809329493741351003}
   m_PrefabAsset: {fileID: 0}

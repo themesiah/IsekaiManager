@@ -7,25 +7,35 @@ namespace Isekai.UI
     public class CharacterHealthUI : MonoBehaviour
     {
         [SerializeField]
-        private CharacterHealth characterHealth;
+        private CharacterHealth characterHealth = default;
 
         [SerializeField]
-        private Slider healthSlider;
+        private Slider healthSlider = default;
 
         private void OnEnable()
         {
-            characterHealth.RegisterOnHealthChanged(OnHealthChanged);
+            characterHealth?.RegisterOnHealthChanged(OnHealthChanged);
         }
 
         private void OnDisable()
         {
-            characterHealth.UnregisterOnHealthChanged(OnHealthChanged);
+            characterHealth?.UnregisterOnHealthChanged(OnHealthChanged);
         }
 
         private void OnHealthChanged(int current)
         {
             float percent = (float)current / (float)characterHealth.GetMaxHealth();
             healthSlider.value = percent;
+        }
+
+        public void AssignCharacter(object character)
+        {
+            characterHealth = ((Character)character).characterHealth;
+            if (characterHealth != null)
+            {
+                characterHealth.RegisterOnHealthChanged(OnHealthChanged);
+                OnHealthChanged(characterHealth.GetCurrentHealth());
+            }
         }
     }
 }

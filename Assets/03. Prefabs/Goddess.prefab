@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5f7da15eddd2847baed4c08d248e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterType: 1
+  characterData: {fileID: 11400000, guid: cef505d67de0a724b91ee59e700b8d53, type: 2}
   portraitPivot: {fileID: 2512232471934446043}
 --- !u!114 &2512232470511315839
 MonoBehaviour:
