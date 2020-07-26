@@ -22,7 +22,7 @@ namespace Isekai.UI
             Close();
         }
 
-        public void Init(BuildingInteractionDataTemplate[] availableInteractions, List<UnityAction> interactionActions)
+        public void Init(List<BuildingInteractionDataTemplate> availableInteractions, List<UnityAction> interactionActions)
         {
             foreach (GameObject go in resourceObjects)
             {
@@ -30,7 +30,7 @@ namespace Isekai.UI
             }
             interactionCanvas.SetActive(true);
 
-            for (int i = 0; i < availableInteractions.Length; ++i)
+            for (int i = 0; i < availableInteractions.Count; ++i)
             {
                 resourceObjects[i].SetActive(true);
                 resourceImages[i].sprite = availableInteractions[i].GetInteractionSprite();

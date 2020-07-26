@@ -1,4 +1,5 @@
 ﻿using Isekai.Interactions;
+using Isekai.Characters;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,7 +31,7 @@ namespace Isekai.Buildings
         [SerializeField]
         protected GameObject positionMarkerPrefab = default;
         [SerializeField]
-        private GamedevsToolbox.ScriptableArchitecture.Values.ScriptableBoolReference globalAllowBuildingsUsage = default;
+        private ScriptableBoolReference globalAllowBuildingsUsage = default;
         [HideInInspector]
         public bool IsBusy = false;
 
@@ -44,7 +45,7 @@ namespace Isekai.Buildings
             hoverEndEvent?.Raise(this);
         }
 
-        public void DispatchCommand(UnityAction<InteractionCommand[]> dispatchAction)
+        public void DispatchCommand(Character character, UnityAction<InteractionCommand[]> dispatchAction)
         {
             if (IsBusy)
             {
@@ -54,22 +55,47 @@ namespace Isekai.Buildings
                 dispatchAction(new InteractionCommand[] { new InteractionNotAvailableCommand("You can't use buildings right now") });
             } else
             {
-                if (buildingInteractionData.Length > 1)
+                List<int> interactionCommandListIndexes = new List<int>();
+                List<BuildingInteractionDataTemplate> characterAvailableInteractions = new List<BuildingInteractionDataTemplate>();
+                for (int i = 0; i < buildingInteractionData.Length; ++i)
+                {
+                    if (buildingInteractionData[i].AvailableForCharacterTypes.Contains(character.GetCharacterType()))
+                    {
+                        interactionCommandListIndexes.Add(i);
+                        characterAvailableInteractions.Add(buildingInteractionData[i]);
+                    }
+                }
+
+                if (interactionCommandListIndexes.Count > 0)
                 {
                     List<UnityAction> actionList = new List<UnityAction>();
-                    for (int i = 0; i < buildingInteractionData.Length; ++i)
+                    
+                    for (int i = 0; i < interactionCommandListIndexes.Count; ++i)
                     {
-                        int index = i;
+                        int index = interactionCommandListIndexes[i];
                         actionList.Add(() => { dispatchAction(GetUniqueCommandSet(index)); });
                     }
-                    interactionSelectionUI.Init(buildingInteractionData, actionList);
+                    interactionSelectionUI.Init(characterAvailableInteractions, actionList);
                     zoomReference?.SetValue(0f);
                     cameraMoveToEvent?.Raise(interactionSelectionUI.transform.position);
                 }
-                else
-                {
-                    dispatchAction(GetUniqueCommandSet(0));
-                }
+
+                //if (buildingInteractionData.Length > 1)
+                //{
+                //    List<UnityAction> actionList = new List<UnityAction>();
+                //    for (int i = 0; i < buildingInteractionData.Length; ++i)
+                //    {
+                //        int index = i;
+                //        actionList.Add(() => { dispatchAction(GetUniqueCommandSet(index)); });
+                //    }
+                //    interactionSelectionUI.Init(buildingInteractionData, actionList);
+                //    zoomReference?.SetValue(0f);
+                //    cameraMoveToEvent?.Raise(interactionSelectionUI.transform.position);
+                //}
+                //else
+                //{
+                //    dispatchAction(GetUniqueCommandSet(0));
+                //}
             }
         }
 

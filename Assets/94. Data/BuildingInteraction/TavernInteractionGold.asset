@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TavernInteractionGold
   m_EditorClassIdentifier: 
   interactionName: Tavern interaction gold
+  availableForCharacterTypes: 0000000001000000
   resourceData: {fileID: 11400000, guid: 381961423e1ca334096d8c75bb9eddf7, type: 2}
   duration: 5
   reward: 10

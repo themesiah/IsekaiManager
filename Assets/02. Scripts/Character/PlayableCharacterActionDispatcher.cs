@@ -21,19 +21,16 @@ namespace Isekai.Characters
                 {
                     selectedCharactersSet.ForEach((pc) =>
                     {
-                        if (CharacterTypeInteractionTable.GetInteractionPermission(pc.characterType, currentInteractableObjectsSet.Items[0].GetInteractionType()))
+                        currentInteractableObjectsSet.Items[0].DispatchCommand(pc, (interactionCommands) =>
                         {
-                            currentInteractableObjectsSet.Items[0].DispatchCommand((interactionCommands) =>
+                            bool cancelAll = true;
+                            foreach (InteractionCommand ic in interactionCommands)
                             {
-                                bool cancelAll = true;
-                                foreach (InteractionCommand ic in interactionCommands)
-                                {
-                                    ic.SetInteractionCharacter(pc);
-                                    pc.commandProcessor.ProcessCommand(ic, cancelAll);
-                                    cancelAll = false;
-                                }
-                            });
-                        }
+                                ic.SetInteractionCharacter(pc);
+                                pc.commandProcessor.ProcessCommand(ic, cancelAll);
+                                cancelAll = false;
+                            }
+                        });
                     });
                 } else
                 {

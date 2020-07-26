@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Isekai.Interactions;
+using UnityEngine;
 
 namespace Isekai.Characters
 {
@@ -7,7 +8,7 @@ namespace Isekai.Characters
         [SerializeField]
         private CharacterData characterData = default;
         public Transform portraitPivot = default;
-        public CharacterTypeEnum characterType { get; private set; }
+        private CharacterTypeEnum characterType = default;
         public RTSCommandProcessor commandProcessor { get; private set; }
         public CharacterMovement characterMovement { get; private set; }
         public NavMeshAgentWrapper agentWrapper { get; private set; }
@@ -37,6 +38,16 @@ namespace Isekai.Characters
         public CharacterData GetCharacterData()
         {
             return characterData;
+        }
+
+        public bool CanInteract(InteractionType interactionType)
+        {
+            return CharacterTypeInteractionTable.GetInteractionPermission(characterType, interactionType);
+        }
+
+        public CharacterTypeEnum GetCharacterType()
+        {
+            return characterType;
         }
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TavernInteractionFavor
   m_EditorClassIdentifier: 
   interactionName: Tavern interaction favor
+  availableForCharacterTypes: 01000000
   resourceData: {fileID: 11400000, guid: 66fa8ee2a35be6643b715e1b28bb2705, type: 2}
   duration: 5
   reward: 1

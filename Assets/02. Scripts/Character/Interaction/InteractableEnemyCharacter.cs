@@ -25,10 +25,12 @@ namespace Isekai.Characters.Interactions
             hoverEndEvent?.Raise(this);
         }
 
-        public void DispatchCommand(UnityAction<InteractionCommand[]> dispatchAction)
+        public void DispatchCommand(Character character, UnityAction<InteractionCommand[]> dispatchAction)
         {
-            AutoAttackBattleCommand command = new AutoAttackBattleCommand(transform, health);
-            dispatchAction(new InteractionCommand[] { command });
+            if (character.CanInteract(GetInteractionType())) {
+                AutoAttackBattleCommand command = new AutoAttackBattleCommand(transform, health);
+                dispatchAction(new InteractionCommand[] { command });
+            }
         }
 
         public InteractionType GetInteractionType()

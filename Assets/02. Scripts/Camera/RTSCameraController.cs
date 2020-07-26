@@ -29,6 +29,8 @@ namespace Isekai.Camera
         [SerializeField]
         private ScriptableBoolReference allowZoom = default;
 
+        private bool onZoomChangedTriggered = false;
+
         private void OnEnable()
         {
             zoomReference.RegisterOnChangeAction(OnZoomChanged);
@@ -41,6 +43,7 @@ namespace Isekai.Camera
 
         private void Update()
         {
+            onZoomChangedTriggered = false;
             DoUpdate();
         }
 
@@ -113,8 +116,10 @@ namespace Isekai.Camera
             if (allowZoom.GetValue())
             {
                 float zoom = Input.GetAxis("Mouse ScrollWheel");
-
-                zoomReference.SetValue(Mathf.Clamp01(zoomReference.GetValue() + zoom * Time.deltaTime * zoomSpeed.GetValue()));
+                if (zoom != 0)
+                {
+                    zoomReference.SetValue(Mathf.Clamp01(zoomReference.GetValue() + zoom * Time.deltaTime * zoomSpeed.GetValue()));
+                }
 
                 Vector3 euler = transform.eulerAngles;
                 euler.x = Mathf.Lerp(cameraRotationZoomLimits.GetValue().y, cameraRotationZoomLimits.GetValue().x, zoomReference.GetValue());
@@ -127,7 +132,11 @@ namespace Isekai.Camera
 
         private void OnZoomChanged(float current)
         {
-            DoUpdate();
+            if (onZoomChangedTriggered == false)
+            {
+                onZoomChangedTriggered = true;
+                DoUpdate();
+            }
         }
     }
 }
