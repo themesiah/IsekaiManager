@@ -20,7 +20,7 @@ namespace Isekai.UI
         {
             if (currentlySelected)
             {
-                characterReference.characterHealth.RegisterOnHealthChanged(UpdateHealth);
+                characterReference.characterHealth?.RegisterOnHealthChanged(UpdateHealth);
             }
         }
 
@@ -28,7 +28,7 @@ namespace Isekai.UI
         {
             if (currentlySelected)
             {
-                characterReference.characterHealth.UnregisterOnHealthChanged(UpdateHealth);
+                characterReference.characterHealth?.UnregisterOnHealthChanged(UpdateHealth);
             }
         }
 
@@ -37,22 +37,28 @@ namespace Isekai.UI
             currentlySelected = true;
             characterReference = (Character)character;
             characterInfoPanel.SetActive(true);
-            characterReference.characterHealth.RegisterOnHealthChanged(UpdateHealth);
+            characterReference?.characterHealth?.RegisterOnHealthChanged(UpdateHealth);
             UpdateUI();
         }
 
         public void OnCharacterUnselected()
         {
             currentlySelected = false;
-            if (characterReference)
-                characterReference.characterHealth.UnregisterOnHealthChanged(UpdateHealth);
+            characterReference?.characterHealth?.UnregisterOnHealthChanged(UpdateHealth);
             characterReference = null;
             characterInfoPanel.SetActive(false);
         }
 
         private void UpdateUI()
         {
-            UpdateHealth(characterReference.characterHealth.GetCurrentHealth());
+            if (characterReference.characterHealth != null)
+            {
+                healthSlider.gameObject.SetActive(true);
+                UpdateHealth(characterReference.characterHealth.GetCurrentHealth());
+            } else
+            {
+                healthSlider.gameObject.SetActive(false);
+            }
             UpdateName();
         }
 
